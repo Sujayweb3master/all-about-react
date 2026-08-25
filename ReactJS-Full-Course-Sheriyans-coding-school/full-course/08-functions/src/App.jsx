@@ -1,3 +1,4 @@
+import Counter from "./components/Counter"
 
 const App = () => {
 
@@ -8,9 +9,12 @@ const App = () => {
 
 
   return (
-    <div>
-      <input type="text" onChange={onchange} placeholder="Enter name" />
-    </div>
+    <>
+      <div>
+        <input type="text" onChange={onchange} placeholder="Enter name" />
+      </div>
+      <Counter />
+    </>
   )
 }
 
