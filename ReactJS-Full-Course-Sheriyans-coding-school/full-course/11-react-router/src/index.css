@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'helvetica neue', sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+input, button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: rgb(5, 8, 8);
+  color: white;
+}
+
+.navbar div {
+  display: flex;
+  align-items: center;
+  gap:30px;
+  flex-wrap: wrap;
+}
+
+.navbar div a {
+  color: white;
+}
