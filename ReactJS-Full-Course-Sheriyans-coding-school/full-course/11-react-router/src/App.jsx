@@ -5,9 +5,10 @@ import Contact from './pages/Contact'
 import Home from './pages/Home'
 import Footer from './components/Footer'
 import NotFound from './pages/NotFound'
-import Product from './pages/Product'
 import Men from './pages/Men'
 import Women from './pages/Women'
+import ProductDetails from './pages/ProductDetails'
+import ProductLayout from './pages/ProductLayout'
 
 const App = () => {
   return (
@@ -15,8 +16,9 @@ const App = () => {
       <Navbar />
       <Footer />
       <Routes>
-        <Route index element={<Home />} />
-        <Route path='product' element={<Product />} >
+        <Route path='/' element={<Home />} />
+        <Route path='product' element={<ProductLayout />} >
+          <Route index element={<ProductDetails />} />
           <Route path='men' element={<Men />} />
           <Route path='women' element={<Women />} />
         </Route>
