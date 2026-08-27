@@ -7,8 +7,8 @@ const Navbar = () => {
             <div className='flex gap-8'>
                 <Link className='text-md block font-medium hover:underline  p-4' to={'/'}>Home</Link>
                 <Link className='text-md block font-medium hover:underline  p-4' to={'/product'}>Product</Link>
+                <Link className='text-md block font-medium hover:underline  p-4' to={'/course-details'}>Courses</Link>
                 <Link className='text-md block font-medium hover:underline  p-4' to={'/about'}>About</Link>
-                <Link className='text-md block font-medium hover:underline  p-4' to={'/contact'}>Contact</Link>
             </div>
         </div>
     )
