@@ -1,0 +1,14 @@
+import { useState } from "react"
+import Navbar from "./components/Navbar"
+
+const App = () => {
+  const [theme, setTheme] = useState('dark')
+
+  return (
+    <div>
+      <Navbar theme={theme} />
+    </div>
+  )
+}
+
+export default App
