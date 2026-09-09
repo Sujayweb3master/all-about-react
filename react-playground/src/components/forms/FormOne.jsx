@@ -3,6 +3,7 @@ import Button from '../ui/Button'
 import Input from '../ui/Input';
 import RadioInputField from '../ui/forms/RadioInputField';
 import CheckboxInputField from '../ui/forms/CheckboxInputField';
+import NumberInput from '../ui/NumberInput';
 
 const FormOne = () => {
 
@@ -30,6 +31,14 @@ const FormOne = () => {
     }
 
     const handleAgeChange = (e) => {
+        if (e.target.value === null || e.target.value === undefined) return
+        if (parseInt(e.target.value) > 100) {
+            setAge('100')
+            return
+        } else if (parseInt(e.target.value) < 0) {
+            setAge('0')
+            return
+        }
         setAge(e.target.value)
     }
 
@@ -63,6 +72,18 @@ const FormOne = () => {
         console.log(e);
 
     }
+
+    const handleStepUp = () => {
+        if (age >= 100) return
+
+        setAge(prev => String(parseInt(prev) + 1))
+    }
+    const handleStepDown = () => {
+        if (age <= 0) return
+
+        setAge(prev => String(parseInt(prev) - 1))
+    }
+
     return (
 
         <div>
@@ -79,11 +100,11 @@ const FormOne = () => {
                     </div>
                     <div className='flex flex-col max-w-100 gap-1'>
                         <label for='age' className='mr-4'>Enter Age</label>
-                        <Input value={age} id={'age'} onChange={handleAgeChange} type='number' max={100} className={``} />
+                        <NumberInput id='age' value={age} handleStepDown={handleStepDown} onNumberInputChange={handleAgeChange} handleStepUp={handleStepUp} />
                     </div>
                     <div className='flex flex-col max-w-100 gap-1'>
                         <p className='mr-4'>Gender</p>
-                        <div className='flex gap-2' onClick={handleGenderChange}>
+                        <div className='flex gap-2' onChange={handleGenderChange}>
                             <RadioInputField value={'Male'} for='male' label='Male' id={'male'} name='gender' checked={gender.male} containerClassName={`flex items-center`} />
                             <RadioInputField value={'FEMALE'} for='female' label='Female' id={'female'} name='gender' checked={gender.female} containerClassName={`flex items-center`} />
                             <RadioInputField value={'OTHER'} for='other' label='Other' id={'other'} name='gender' checked={gender.other} containerClassName={`flex items-center`} />
