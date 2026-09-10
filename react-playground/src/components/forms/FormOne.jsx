@@ -8,8 +8,10 @@ import NumberInput from '../ui/NumberInput';
 const FormOne = () => {
 
     const [name, setName] = useState('')
+    const [emailId, setEmailId] = useState('')
+    const [password, setPassword] = useState('')
     const [fatherName, setFatherName] = useState('')
-    const [age, setAge] = useState('')
+    const [age, setAge] = useState('0')
     const [gender, setGender] = useState({
         male: false,
         female: true,
@@ -28,6 +30,10 @@ const FormOne = () => {
 
     const handleNameChange = (e) => {
         setName(e.target.value)
+    }
+
+    const handleEmailChange = (e) => {
+        setEmailId(e.target.value)
     }
 
     const handleAgeChange = (e) => {
@@ -73,14 +79,21 @@ const FormOne = () => {
 
     }
 
-    const handleStepUp = () => {
-        if (age >= 100) return
-
+    const handleStepUp = (e) => {
+        e.stopPropagation();
+        if (age >= 100) {
+            setAge('100')
+            return
+        }
         setAge(prev => String(parseInt(prev) + 1))
     }
-    const handleStepDown = () => {
-        if (age <= 0) return
 
+    const handleStepDown = (e) => {
+        e.stopPropagation();
+        if (age <= 0) {
+            setAge('0')
+            return
+        }
         setAge(prev => String(parseInt(prev) - 1))
     }
 
@@ -94,9 +107,32 @@ const FormOne = () => {
                         <Input value={name} id={'name'} onChange={handleNameChange} />
                     </div>
                     <div className='flex flex-col max-w-100 gap-1'>
+                        <label for='name' className='mr-4'>Enter Name</label>
+                        <Input value={name} id={'name'} onChange={handleNameChange} />
+                    </div>
+                    <div className='flex flex-col max-w-100 gap-1'>
+                        <label for='name' className='mr-4'>Enter Name</label>
+                        <Input value={name} id={'name'} onChange={handleNameChange} />
+                    </div>
+                    <div className='flex flex-col max-w-100 gap-1'>
+                        <label for='name' className='mr-4'>Enter Name</label>
+                        <Input value={name} id={'name'} onChange={handleNameChange} />
+                    </div>
+                    <div className='flex flex-col max-w-100 gap-1'>
+                        <label for='name' className='mr-4'>Enter Name</label>
+                        <Input value={name} id={'name'} onChange={handleNameChange} />
+                    </div>
+                    <div className='flex flex-col max-w-100 gap-1'>
+                        <label for='name' className='mr-4'>Enter Name</label>
+                        <Input value={name} id={'name'} onChange={handleNameChange} />
+                    </div>
+                    <div className='flex flex-col max-w-100 gap-1'>
+                        <label for='email-id' className='mr-4'>Enter Email</label>
+                        <Input value={emailId} id='email-id' type='email' onChange={handleEmailChange} />
+                    </div>
+                    <div className='flex flex-col max-w-100 gap-1'>
                         <label for='father-name' className='mr-4'>Enter Father's Name</label>
                         <Input value={fatherName} id={'father-name'} onChange={handleFatherNameChange} />
-
                     </div>
                     <div className='flex flex-col max-w-100 gap-1'>
                         <label for='age' className='mr-4'>Enter Age</label>

@@ -1,7 +1,7 @@
 
 const Sidebar = () => {
     return (
-        <aside className="h-full text-white w-62.5 p-4 bg-[#1b8bf3]" >
+        <aside className="h-full flex-1 text-white w-62.5 p-4 bg-[#1b8bf3]" >
             <div>
                 <h3 className="text-2xl">Workspace Selector</h3>
             </div>

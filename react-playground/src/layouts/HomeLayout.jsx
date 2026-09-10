@@ -6,7 +6,7 @@ const HomeLayout = ({ children }) => {
 
     return (
         <>
-            <main className="h-full bg-[#333333]">
+            <main className="h-[100vh] bg-[#333333] flex flex-col">
                 <Header />
                 <MainContent children={children} />
                 <Footer />
