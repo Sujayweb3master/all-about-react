@@ -36,6 +36,10 @@ const FormOne = () => {
         setEmailId(e.target.value)
     }
 
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value)
+    }
+
     const handleAgeChange = (e) => {
         if (e.target.value === null || e.target.value === undefined) return
         if (parseInt(e.target.value) > 100) {
@@ -107,28 +111,12 @@ const FormOne = () => {
                         <Input value={name} id={'name'} onChange={handleNameChange} />
                     </div>
                     <div className='flex flex-col max-w-100 gap-1'>
-                        <label for='name' className='mr-4'>Enter Name</label>
-                        <Input value={name} id={'name'} onChange={handleNameChange} />
-                    </div>
-                    <div className='flex flex-col max-w-100 gap-1'>
-                        <label for='name' className='mr-4'>Enter Name</label>
-                        <Input value={name} id={'name'} onChange={handleNameChange} />
-                    </div>
-                    <div className='flex flex-col max-w-100 gap-1'>
-                        <label for='name' className='mr-4'>Enter Name</label>
-                        <Input value={name} id={'name'} onChange={handleNameChange} />
-                    </div>
-                    <div className='flex flex-col max-w-100 gap-1'>
-                        <label for='name' className='mr-4'>Enter Name</label>
-                        <Input value={name} id={'name'} onChange={handleNameChange} />
-                    </div>
-                    <div className='flex flex-col max-w-100 gap-1'>
-                        <label for='name' className='mr-4'>Enter Name</label>
-                        <Input value={name} id={'name'} onChange={handleNameChange} />
-                    </div>
-                    <div className='flex flex-col max-w-100 gap-1'>
                         <label for='email-id' className='mr-4'>Enter Email</label>
                         <Input value={emailId} id='email-id' type='email' onChange={handleEmailChange} />
+                    </div>
+                    <div className='flex flex-col max-w-100 gap-1'>
+                        <label for='password' className='mr-4'>Enter Password</label>
+                        <Input value={password} id='password' type='password' onChange={handlePasswordChange} />
                     </div>
                     <div className='flex flex-col max-w-100 gap-1'>
                         <label for='father-name' className='mr-4'>Enter Father's Name</label>
