@@ -1,4 +1,4 @@
-import PageTwo from "./components/PageTwo"
+import PageTwo from "./pages/PageTwo"
 import HomeLayout from "./layouts/HomeLayout"
 
 const App = () => {
