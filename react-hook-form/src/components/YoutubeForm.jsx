@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form'
+import { useForm, useFieldArray } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools';
 
 const YoutubeForm = () => {
@@ -10,7 +10,11 @@ const YoutubeForm = () => {
             social: {
                 twitter: "",
                 facebook: ""
-            }
+            },
+            phoneNumbers: ["", ""],
+            phNumbers: [{
+                number: ""
+            }]
         }
         // async () => {
         //     const response = await fetch('https://jsonplaceholder.typicode.com/users/1')
@@ -23,6 +27,11 @@ const YoutubeForm = () => {
     })
     const { register, control, handleSubmit, formState } = form;
     const { errors } = formState;
+
+    const { fields, append, remove } = useFieldArray({
+        name: 'phNumbers',
+        control: control
+    })
 
     const onSubmit = (data) => {
         console.log('Form submitted with data:', data);
@@ -82,14 +91,63 @@ const YoutubeForm = () => {
 
                 <div className='form-control'>
                     <label htmlFor="twitter">Twitter</label>
-                    <input type="text" id="twitter" {...register('social.twitter')} />
-                    {/* <p className='error'>{errors.channel?.message}</p> */}
+                    <input type="text" id="twitter" {...register('social.twitter', {
+                        required: {
+                            value: true,
+                            message: 'Twitter handle is required'
+                        }
+                    })} />
+                    <p className='error'>{errors.social?.twitter?.message}</p>
                 </div>
 
                 <div className='form-control'>
                     <label htmlFor="facebook">Facebook</label>
-                    <input type="text" id="facebook" {...register('social.facebook')} />
+                    <input type="text" id="facebook" {...register('social.facebook', {
+                        required: {
+                            value: true,
+                            message: 'Facebook handle is required'
+                        }
+                    })} />
+                    <p className='error'>{errors.social?.facebook?.message}</p>
+                </div>
+
+                <div className='form-control'>
+                    <label htmlFor="primary-phone">Primary phone number</label>
+                    <input type="text" id="primary-phone" {...register('phoneNumbers.0', {
+                        required: {
+                            value: true,
+                            message: 'Primary phone number is required'
+                        }
+                    })} />
+                    <p className='error'>{errors.phoneNumbers?.[0]?.message}</p>
+                </div>
+
+                <div className='form-control'>
+                    <label htmlFor="secondary-phone">Secondary phone number</label>
+                    <input type="text" id="secondary-phone" {...register('phoneNumbers.1')} />
                     {/* <p className='error'>{errors.channel?.message}</p> */}
+                </div>
+
+                <div>
+                    <label>List of phone numbers</label>
+                    <div>
+                        {fields.map((field, index) => {
+                            return (
+                                <>
+                                    <div className='form-control' key={field.id}>
+                                        <input type='text' {...register(`phNumbers.${index}.number`)} />
+                                        {
+                                            index > 0 && (
+                                                <button type="button" onClick={() => remove(index)}>Remove</button>
+                                            )
+                                        }
+                                    </div>
+                                </>
+                            )
+                        }
+                        )}
+                        <button type="button" onClick={() => append({ number: "" })}>Add phone number</button>
+                    </div>
                 </div>
 
                 <button>Submit</button>
