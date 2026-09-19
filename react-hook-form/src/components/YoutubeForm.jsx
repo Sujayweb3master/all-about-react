@@ -22,6 +22,10 @@ const YoutubeForm = () => {
                         required: {
                             value: true,
                             message: 'Username is required'
+                        },
+                        // validation : function value for single custom validation rule.
+                        validate: (fieldValue) => {
+                            return fieldValue !== 'admin' || 'Please enter a different username'
                         }
                     })} />
                     <p className='error'>{errors.username?.message}</p>
@@ -33,6 +37,15 @@ const YoutubeForm = () => {
                         pattern: {
                             value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                             message: 'Invalid email format'
+                        },
+                        // validation : object value for multiple custom validation rules.
+                        validate: {
+                            notAdmin: (fieldValue) => {
+                                return fieldValue !== 'admin@example.com' || 'Enter a different email address'
+                            },
+                            notBlackListed: (fieldValue) => {
+                                return !fieldValue.endsWith('baddomain.com') || 'This domain is not supported'
+                            }
                         }
                     })} />
                     <p className='error'>{errors.email?.message}</p>
