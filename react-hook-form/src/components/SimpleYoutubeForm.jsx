@@ -1,26 +1,8 @@
 import { useForm } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools';
 
-const YoutubeForm = () => {
-    const form = useForm({
-        defaultValues: {
-            username: "superman",
-            email: "",
-            channel: "",
-            social: {
-                twitter: "",
-                facebook: ""
-            }
-        }
-        // async () => {
-        //     const response = await fetch('https://jsonplaceholder.typicode.com/users/1')
-        //     const data = await response.json();
-        //     return {
-        //         username: "superman",
-        //         email: data.email,
-        //         channel: ""
-        //     }
-    })
+const SimpleYoutubeForm = () => {
+    const form = useForm()
     const { register, control, handleSubmit, formState } = form;
     const { errors } = formState;
 
@@ -80,18 +62,6 @@ const YoutubeForm = () => {
                     <p className='error'>{errors.channel?.message}</p>
                 </div>
 
-                <div className='form-control'>
-                    <label htmlFor="twitter">Twitter</label>
-                    <input type="text" id="twitter" {...register('social.twitter')} />
-                    {/* <p className='error'>{errors.channel?.message}</p> */}
-                </div>
-
-                <div className='form-control'>
-                    <label htmlFor="facebook">Facebook</label>
-                    <input type="text" id="facebook" {...register('social.facebook')} />
-                    {/* <p className='error'>{errors.channel?.message}</p> */}
-                </div>
-
                 <button>Submit</button>
             </form>
             <DevTool control={control} />
@@ -99,4 +69,4 @@ const YoutubeForm = () => {
     )
 }
 
-export default YoutubeForm
+export default SimpleYoutubeForm
