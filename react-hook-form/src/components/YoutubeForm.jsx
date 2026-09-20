@@ -32,7 +32,7 @@ const YoutubeForm = () => {
         //         channel: ""
         //     }
     })
-    const { register, control, handleSubmit, formState, watch, getValues, setValue, reset } = form;
+    const { register, control, handleSubmit, formState, watch, getValues, setValue, reset, trigger } = form;
     const { errors, touchedFields, dirtyFields, isDirty, isValid, isSubmitting, isSubmitted, isSubmitSuccessful, submitCount, } = formState;
     const { fields, append, remove } = useFieldArray({
         name: 'phNumbers',
@@ -40,7 +40,7 @@ const YoutubeForm = () => {
     })
 
     // Form submission states
-    console.log({ isSubmitting, isSubmitted, isSubmitSuccessful, submitCount, errors });
+    console.log({ isSubmitting, isSubmitted, isSubmitSuccessful, submitCount, errors, isValid });
 
     // useful form states 
     // console.log({ touchedFields, dirtyFields, isDirty, isValid })
@@ -231,8 +231,9 @@ const YoutubeForm = () => {
                 <button type="button" onClick={() => reset()}>Reset Form</button>
                 <button type="button" onClick={handleGetValues}>Get Values</button>
                 <button type="button" onClick={handleSetValue}>Set Value</button>
+                <button type="button" onClick={() => trigger(['channel', 'social.facebook'])}>Trigger</button>
             </form>
-            {/* <DevTool control={control} /> */}
+            <DevTool control={control} />
         </div>
     )
 }
