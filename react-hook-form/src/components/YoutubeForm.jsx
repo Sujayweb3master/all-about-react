@@ -2,7 +2,10 @@ import { useForm, useFieldArray } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools';
 import { useEffect } from 'react';
 
+let RenderCount = 0;
+
 const YoutubeForm = () => {
+    // console.trace('YoutubeForm render', RenderCount + 1)
     const form = useForm({
         defaultValues: {
             username: "superman",
@@ -29,7 +32,11 @@ const YoutubeForm = () => {
         //     }
     })
     const { register, control, handleSubmit, formState, watch, getValues, setValue } = form;
-    const { errors } = formState;
+    const { errors, touchedFields, dirtyFields, isDirty } = formState;
+
+    console.log(touchedFields)
+    console.log(dirtyFields)
+    console.log(isDirty)
 
     const { fields, append, remove } = useFieldArray({
         name: 'phNumbers',
@@ -62,13 +69,15 @@ const YoutubeForm = () => {
 
         })
         return () => subscription.unsubscribe();
-        // console.log(watch('username'));
+        //     // console.log(watch('username'));
 
     }, [watch])
 
+    RenderCount++
+
     return (
         <div>
-            <h1>YouTube Form</h1>
+            <h1>YouTube Form ({RenderCount})</h1>
             {/* <h2>Watched value: {JSON.stringify(watchForm)}</h2> */}
 
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -154,7 +163,6 @@ const YoutubeForm = () => {
                 <div className='form-control'>
                     <label htmlFor="secondary-phone">Secondary phone number</label>
                     <input type="text" id="secondary-phone" {...register('phoneNumbers.1')} />
-                    {/* <p className='error'>{errors.channel?.message}</p> */}
                 </div>
 
                 <div>

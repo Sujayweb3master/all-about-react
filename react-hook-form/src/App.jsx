@@ -1,13 +1,15 @@
-import { useState } from 'react'
 import './App.css'
 import YoutubeForm from './components/YoutubeForm'
 
+let appRenderCount = 0;
 function App() {
-  const [count, setCount] = useState(0)
+  appRenderCount++;
+  console.log('App render', appRenderCount);
 
   return (
     <>
       <YoutubeForm />
+      {/* <p> Render Count - ({renderCount})</p> */}
     </>
   )
 }
