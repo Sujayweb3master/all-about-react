@@ -1,10 +1,11 @@
+import { useForm, useFieldArray } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools';
-import { useFieldArray, useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 
 let RenderCount = 0;
 
-const YoutubeForm = () => {
-    // console.trace('YoutubeForm render', RenderCount + 1)
+const StateEnhancementsForm = () => {
+    // console.trace('StateEnhancementsForm render', RenderCount + 1)
     const form = useForm({
         defaultValues: {
             username: "superman",
@@ -31,13 +32,16 @@ const YoutubeForm = () => {
         //     }
     })
     const { register, control, handleSubmit, formState, watch, getValues, setValue } = form;
-    const { errors, touchedFields, dirtyFields, isDirty, isValid } = formState;
+    const { errors, touchedFields, dirtyFields, isDirty } = formState;
+
+    console.log(touchedFields)
+    console.log(dirtyFields)
+    console.log(isDirty)
+
     const { fields, append, remove } = useFieldArray({
         name: 'phNumbers',
         control: control
     })
-
-    console.log({ touchedFields, dirtyFields, isDirty, isValid })
 
     const handleGetValues = () => {
         console.log(getValues(['username', 'email']))
@@ -51,11 +55,6 @@ const YoutubeForm = () => {
         })
     }
 
-    const onError = (errors) => {
-        console.log('Form errors', errors);
-
-    }
-
     const onSubmit = (data) => {
         console.log('Form submitted with data:', data);
 
@@ -64,15 +63,15 @@ const YoutubeForm = () => {
     // const watchUserName = watch(['username', 'email'])
     // const watchForm = watch();
 
-    // useEffect(() => {
-    //     const subscription = watch((value) => {
-    //         console.log(value);
+    useEffect(() => {
+        const subscription = watch((value) => {
+            console.log(value);
 
-    //     })
-    //     return () => subscription.unsubscribe();
-    //     //     // console.log(watch('username'));
+        })
+        return () => subscription.unsubscribe();
+        //     // console.log(watch('username'));
 
-    // }, [watch])
+    }, [watch])
 
     RenderCount++
 
@@ -81,7 +80,7 @@ const YoutubeForm = () => {
             <h1>YouTube Form ({RenderCount})</h1>
             {/* <h2>Watched value: {JSON.stringify(watchForm)}</h2> */}
 
-            <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div className='form-control'>
                     <label htmlFor="username">Username</label>
                     <input type="text" id="username" {...register('username', {
@@ -209,7 +208,7 @@ const YoutubeForm = () => {
                     <p className='error'>{errors.dob?.message}</p>
                 </div>
 
-                <button disabled={!isDirty || !isValid}>Submit</button>
+                <button>Submit</button>
                 <button type="button" onClick={handleGetValues}>Get Values</button>
                 <button type="button" onClick={handleSetValue}>Set Value</button>
             </form>
@@ -218,4 +217,4 @@ const YoutubeForm = () => {
     )
 }
 
-export default YoutubeForm
+export default StateEnhancementsForm
