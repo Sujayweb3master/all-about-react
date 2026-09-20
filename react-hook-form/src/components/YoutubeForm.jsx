@@ -1,5 +1,6 @@
 import { useForm, useFieldArray } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools';
+import { useEffect } from 'react';
 
 const YoutubeForm = () => {
     const form = useForm({
@@ -27,7 +28,7 @@ const YoutubeForm = () => {
         //         channel: ""
         //     }
     })
-    const { register, control, handleSubmit, formState } = form;
+    const { register, control, handleSubmit, formState, watch, getValues, setValue } = form;
     const { errors } = formState;
 
     const { fields, append, remove } = useFieldArray({
@@ -35,14 +36,40 @@ const YoutubeForm = () => {
         control: control
     })
 
+    const handleGetValues = () => {
+        console.log(getValues(['username', 'email']))
+    }
+
+    const handleSetValue = () => {
+        setValue('username', '', {
+            shouldValidate: true,
+            shouldTouch: true,
+            shouldDirty: true
+        })
+    }
+
     const onSubmit = (data) => {
         console.log('Form submitted with data:', data);
 
     }
 
+    // const watchUserName = watch(['username', 'email'])
+    // const watchForm = watch();
+
+    useEffect(() => {
+        const subscription = watch((value) => {
+            console.log(value);
+
+        })
+        return () => subscription.unsubscribe();
+        // console.log(watch('username'));
+
+    }, [watch])
+
     return (
         <div>
             <h1>YouTube Form</h1>
+            {/* <h2>Watched value: {JSON.stringify(watchForm)}</h2> */}
 
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div className='form-control'>
@@ -173,6 +200,8 @@ const YoutubeForm = () => {
                 </div>
 
                 <button>Submit</button>
+                <button type="button" onClick={handleGetValues}>Get Values</button>
+                <button type="button" onClick={handleSetValue}>Set Value</button>
             </form>
             <DevTool control={control} />
         </div>
