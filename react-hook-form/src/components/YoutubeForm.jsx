@@ -21,7 +21,8 @@ const YoutubeForm = () => {
             }],
             age: 0,
             dob: new Date()
-        }
+        },
+        mode: 'onTouched'
         // async () => {
         //     const response = await fetch('https://jsonplaceholder.typicode.com/users/1')
         //     const data = await response.json();
@@ -126,7 +127,6 @@ const YoutubeForm = () => {
                             emailAvailable: async (fieldValue) => {
                                 const response = await fetch(`https://jsonplaceholder.typicode.com/users?email=${fieldValue}`)
                                 const data = await response.json()
-                                console.log('data', data);
 
                                 return data.length === 0 || "Email already exists"
                             }
