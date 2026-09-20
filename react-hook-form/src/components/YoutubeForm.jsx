@@ -1,4 +1,5 @@
 import { DevTool } from '@hookform/devtools';
+import { useEffect } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 
 let RenderCount = 0;
@@ -30,14 +31,18 @@ const YoutubeForm = () => {
         //         channel: ""
         //     }
     })
-    const { register, control, handleSubmit, formState, watch, getValues, setValue } = form;
-    const { errors, touchedFields, dirtyFields, isDirty, isValid } = formState;
+    const { register, control, handleSubmit, formState, watch, getValues, setValue, reset } = form;
+    const { errors, touchedFields, dirtyFields, isDirty, isValid, isSubmitting, isSubmitted, isSubmitSuccessful, submitCount, } = formState;
     const { fields, append, remove } = useFieldArray({
         name: 'phNumbers',
         control: control
     })
 
-    console.log({ touchedFields, dirtyFields, isDirty, isValid })
+    // Form submission states
+    console.log({ isSubmitting, isSubmitted, isSubmitSuccessful, submitCount, errors });
+
+    // useful form states 
+    // console.log({ touchedFields, dirtyFields, isDirty, isValid })
 
     const handleGetValues = () => {
         console.log(getValues(['username', 'email']))
@@ -73,6 +78,12 @@ const YoutubeForm = () => {
     //     //     // console.log(watch('username'));
 
     // }, [watch])
+
+    useEffect(() => {
+        if (isSubmitSuccessful) {
+            reset()
+        }
+    }, [isSubmitSuccessful, reset])
 
     RenderCount++
 
@@ -111,6 +122,13 @@ const YoutubeForm = () => {
                             },
                             notBlackListed: (fieldValue) => {
                                 return !fieldValue.endsWith('baddomain.com') || 'This domain is not supported'
+                            },
+                            emailAvailable: async (fieldValue) => {
+                                const response = await fetch(`https://jsonplaceholder.typicode.com/users?email=${fieldValue}`)
+                                const data = await response.json()
+                                console.log('data', data);
+
+                                return data.length === 0 || "Email already exists"
                             }
                         }
                     })} />
@@ -209,11 +227,12 @@ const YoutubeForm = () => {
                     <p className='error'>{errors.dob?.message}</p>
                 </div>
 
-                <button disabled={!isDirty || !isValid}>Submit</button>
+                <button disabled={!isDirty || isSubmitting} >Submit</button>
+                <button type="button" onClick={() => reset()}>Reset Form</button>
                 <button type="button" onClick={handleGetValues}>Get Values</button>
                 <button type="button" onClick={handleSetValue}>Set Value</button>
             </form>
-            <DevTool control={control} />
+            {/* <DevTool control={control} /> */}
         </div>
     )
 }
