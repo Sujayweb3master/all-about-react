@@ -29,7 +29,11 @@ const MUILoginForm = () => {
             <form noValidate onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing={2} sx={{ width: '400px' }}>
                     <TextField size='small' label="Email" type='email' {...register('email', {
-                        required: "Email is required"
+                        required: "Email is required",
+                        pattern: {
+                            message: 'Enter a valid email',
+                            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+                        }
                     })} error={!!errors.email} helperText={errors.email?.message} />
                     <TextField size='small' label='Password' type='password' {...register('password', {
                         required: "Password is required"
