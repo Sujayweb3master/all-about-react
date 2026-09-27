@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@tailwindcss base;
+@tailwindcss components;
+@tailwindcss utilities;
 
 /* * {
   box-sizing: border-box;
@@ -20,5 +23,15 @@ body {
 } */
 
 #root {
-  height: 100vh;
+    height: 100vh;
+}
+
+@utility custom-scrollbar {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #666 #333;
+}
+
+@utility scrollbar-thumb {
+    scrollbar-color: var(--color-sky-400) #fff;
 }

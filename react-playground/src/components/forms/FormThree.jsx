@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useForm } from "react-hook-form";
 import Input from '../ui/Input';
+import Button from '../ui/Button';
 
 const FormThree = () => {
     const { register, handleSubmit, unregister } = useForm();
@@ -24,7 +25,7 @@ const FormThree = () => {
             <input type="text" name="lastName" /> */}
             <Input ref={ref} />
             {/* <button type="button" onClick={() => unregister("lastName")}>unregister</button> */}
-            <input type="submit" />
+            <Button />
         </form>
     );
 }
