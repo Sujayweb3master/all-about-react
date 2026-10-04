@@ -6,6 +6,8 @@ import './index.css'
 import Home from './pages/Home.jsx'
 import PageOne from './pages/PageOne.jsx'
 import About from './pages/About.jsx'
+import Packages from './pages/Packages.jsx'
+import PackageDetails from './pages/PackageDetails.jsx'
 
 const router = createBrowserRouter([
   {
@@ -14,7 +16,7 @@ const router = createBrowserRouter([
     children: [{
       // path: "/",
       index: true,
-      element: <Home />
+      element: <Home />,
     },
     {
       path: '/about',
@@ -23,9 +25,26 @@ const router = createBrowserRouter([
     {
       path: "/page-one",
       element: <PageOne />
+    },
+    {
+      path: "/packages",
+      children: [
+        {
+          index: true,
+          element: <Packages />
+        },
+        {
+          path: ":pId",
+          element: <PackageDetails />
+        }
+      ]
     }
     ]
-  }
+  },
+  // {
+  //   path: "*",
+  //   errorElement: <Home />
+  // }
 ])
 
 const root = document.getElementById('root');

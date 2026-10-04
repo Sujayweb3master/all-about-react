@@ -33,5 +33,5 @@ body {
 }
 
 @utility scrollbar-thumb {
-    scrollbar-color: var(--color-sky-400) #fff;
+    scrollbar-color: var(--color-sky-400) #333;
 }

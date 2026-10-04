@@ -2,7 +2,7 @@ import { Link } from "react-router"
 
 const Sidebar = () => {
     return (
-        <aside className="h-full min-w-[250px] flex-1 text-white w-62.5 p-4 bg-[#1b8bf3]" >
+        <aside className="h-full min-w-[250px] flex-1 text-white max-w-62.5 p-4 bg-[#1b8bf3]" >
             {/* <div>
                 <h3 className="text-2xl">Workspace Selector</h3>
             </div> */}

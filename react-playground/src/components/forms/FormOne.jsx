@@ -41,6 +41,7 @@ const FormOne = () => {
     }
 
     const handleAgeChange = (e) => {
+
         if (e.target.value === null || e.target.value === undefined) return
         if (parseInt(e.target.value) > 100) {
             setAge('100')
@@ -85,11 +86,14 @@ const FormOne = () => {
 
     const handleStepUp = (e) => {
         e.stopPropagation();
-        if (age >= 100) {
+        if (parseInt(age) >= 100) {
             setAge('100')
             return
         }
-        setAge(prev => String(parseInt(prev) + 1))
+        setAge(prev => {
+
+            return String(parseInt(prev) + 1)
+        })
     }
 
     const handleStepDown = (e) => {

@@ -7,7 +7,10 @@ const ThemeContext = (props) => {
 
     return (
         <div>
-            <ThemeDataContext.Provider value='Sujay'>
+            <ThemeDataContext.Provider value={{
+                theme: 'dark',
+                user: 'Sujay'
+            }}>
                 {props.children}
             </ThemeDataContext.Provider>
         </div>
